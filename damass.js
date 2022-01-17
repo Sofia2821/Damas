@@ -1,6 +1,6 @@
 const tamanhoCelula = 40;
 document.body.append(criaTabuleiro());
-document.body.background = 'fundodamas.jpg';
+document.body.background = 'PASTA-IMG/fundodamas.jpg';
 
 function criaTabuleiro() {
     const tamanho = 8;
