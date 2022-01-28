@@ -1,4 +1,8 @@
 const tamanhoCelula = 40;
+let pecaId = 0;
+let lf = 0;
+let la = 0;
+let c = "";
 document.body.append(criaTabuleiro());
 document.body.background = 'PASTA-IMG/fundodamas.jpg';
 
@@ -45,25 +49,43 @@ function criaPeca(cor) {
     return imagem;
 }
 
-const draggables = document.querySelectorAll(".draggable");
-const containers = document.querySelectorAll(".container");
+function dragstart(){
+	document.addEventListener("dragstart", function(event) {
+	  event.dataTransfer.setData("Text", event.target.id);
+	  la = event.path[1].id;
+	  c = event.path[0].className;
+	  
+	});
+}
 
-draggables.forEach(draggable => {
-    draggable.addEventListener("dragstart", () => {
-        draggable.classList.add("dragging");
-        
-    });
-    draggable.addEventListener("dragend", () => {
-        draggable.classList.remove("dragging");
-    });
-});
+function dragend() {
+	document.addEventListener("dragend", function(event) {
+	});
+}
 
-containers.forEach(container => {
-    container.addEventListener("dragover", e => {
-        e.preventDefault();
-    });
-    container.addEventListener("drop", () => {
-        const draggable = document.querySelector(".dragging");
-        container.appendChild(draggable);
-    });
-});
+function dragover() {
+	document.addEventListener("dragover", function(event) {
+	  event.preventDefault();
+	});
+}
+function drop(){
+	document.addEventListener("drop", function(event) {
+		event.preventDefault();
+		if ( event.target.className == "droptarget") {
+			const data = event.dataTransfer.getData("Text");
+				let w = event.path[0];
+				let e = w.childElementCount;
+				lf = event.target.id;
+				console.log(event)
+				if(e == '0' && la != lf && lf - la == 1 || lf - la == -1){
+					if(c == "red" && la > lf || c == "black" && la < lf)
+					event.target.appendChild(document.getElementById(data));
+				}
+		}
+	});
+}
+
+dragstart();
+dragend();
+dragover();
+drop();
