@@ -6,6 +6,7 @@ let c = "";
 document.body.append(criaTabuleiro());
 document.body.background = 'PASTA-IMG/fundodamas.jpg';
 
+
 function criaTabuleiro() {
     const tamanho = 8;
     let tabela = document.createElement('table');
@@ -17,35 +18,39 @@ function criaTabuleiro() {
 
     for (let i = 0; i < tamanho; i++) {
         let linha = document.createElement('tr');
+		
         tabela.append(linha);
         for (let j = 0; j < tamanho; j++) {
             let celula = document.createElement('td');
+			celula.setAttribute('id', i);
             linha.append(celula);
             celula.style.width = `${tamanhoCelula}px`;
             celula.style.height = `${tamanhoCelula}px`;
+			pecaId += 1;
             if (i % 2 == j % 2) {
                 celula.style.backgroundColor = '#f2cbf5';
-                celula.classList.add("container");
+				celula.setAttribute("class","droptarget");
                 if (i * 8 + j <= 24) {
-                    celula.append(criaPeca('black'));
+                    celula.append(criaPeca('black',pecaId));
                 } else if (i * 8 + j >= 40) {
-                    celula.append(criaPeca('red'));
+                    celula.append(criaPeca('red',pecaId));
                 }
             } else {
                 celula.style.backgroundColor = 'white';
             }
         }
-    };
+    }
     return tabela;
 }
 
-function criaPeca(cor) {
+function criaPeca(cor,ws) {
     let imagem = document.createElement('img');
-    imagem.setAttribute('src', `PASTA-IMG/${cor}.png`);
-    imagem.setAttribute('width', `${tamanhoCelula-4}px`);
-    imagem.setAttribute('height', `${tamanhoCelula-4}px`);
-    imagem.setAttribute('draggable','true');
-    imagem.classList.add("draggable");
+		imagem.setAttribute('src', `PASTA-IMG/${cor}.png`);
+		imagem.setAttribute('width', `${tamanhoCelula-4}px`);
+		imagem.setAttribute('height', `${tamanhoCelula-4}px`);
+		imagem.setAttribute('draggable','true');
+		imagem.setAttribute('id', ws);
+		imagem.setAttribute('class', cor);
     return imagem;
 }
 
