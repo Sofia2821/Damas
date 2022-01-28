@@ -43,14 +43,13 @@ function criaTabuleiro() {
     return tabela;
 }
 
-function criaPeca(cor,ws) {
+function criaPeca(cor) {
     let imagem = document.createElement('img');
-		imagem.setAttribute('src', `PASTA-IMG/${cor}.png`);
-		imagem.setAttribute('width', `${tamanhoCelula-4}px`);
-		imagem.setAttribute('height', `${tamanhoCelula-4}px`);
-		imagem.setAttribute('draggable','true');
-		imagem.setAttribute('id', ws);
-		imagem.setAttribute('class', cor);
+    imagem.setAttribute('src', `PASTA-IMG/${cor}.png`);
+    imagem.setAttribute('width', `${tamanhoCelula-4}px`);
+    imagem.setAttribute('height', `${tamanhoCelula-4}px`);
+    imagem.setAttribute('draggable','true');
+    imagem.classList.add("draggable");
     return imagem;
 }
 
